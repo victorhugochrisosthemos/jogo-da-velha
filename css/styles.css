@@ -1,0 +1,130 @@
+/*resetando características dos elementos HTML*/
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: #5F81EE;
+}
+.board{
+    display:grid;
+    width: 100%;
+    height: 100%;
+    justify-content: center; /* para centralizar todo o conteudo*/
+    align-content: center; /* para centralizar todo o conteudo verticalmente*/
+    align-items: center;
+    grid-template-columns: repeat(3,auto);
+}
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background: rgba(255,255,255,0.15) !important;
+}
+.cell{
+    width: 100px;
+    height: 100px;
+    border: 2px solid #0B216B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.cell.x,.cell.circle{
+    cursor: not-allowed;
+}
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+.cell:nth-child(1),
+.cell:nth-child(4),
+.cell:nth-child(7){
+    border-left: none;
+}
+.cell:nth-child(7),
+.cell:nth-child(8),
+.cell:nth-child(9){
+    border-bottom: none;
+}
+.cell:nth-child(3),
+.cell:nth-child(6),
+.cell:nth-child(9){
+    border-right: none;
+}
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    content: "";
+    height: calc(100px * 0.15);
+    width: calc(100px * 0.9);
+    background: rgb(253, 253, 253);
+    position: absolute;
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before{
+    transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    content: "";
+    height: calc(100px * 0.9);
+    width: calc(100px * 0.9);
+    background: rgb(253, 253, 253);
+    position: absolute;
+    border-radius: 50%
+}
+
+/*
+essa classe fica invisivel até segunda ordem
+é a mensagem de vitória
+*/
+.winning-message{
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    flex-direction: column;
+}
+
+.winning-message-button{
+    font-size: 2.5rem;
+    background-color: #1749EB;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin-top: 16px;
+    color: white;
+}
+
+.winning-message-button:hover{
+    background-color: white;
+    color: #1749EB;
+}
+
+.winning-message-text{
+    color: white;
+    font-size: 5rem;
+}
+.show-winning-message{
+    display: flex;
+}
